@@ -34,6 +34,8 @@ album:
   name: Strobe
   date: '2018-08-04'
   company: Self-Released
+# MV 编号，指定该项之后将会在名称后面给一个 MV 入口。
+mv: 5501271
 
 # 简介，针对该歌曲的一个简单说明。
 intro: 该曲听起来略为抓耳，女生的长气息咏唱，仿佛在诉说内心的等待。
