@@ -1,0 +1,15 @@
+doctype html
+html
+  head
+    include ./head
+
+  body
+    .nmr
+      h1 Netease music recommendation.
+
+      block content
+
+    if script
+      script!=script
+    else
+      script(src="./js/index.js")

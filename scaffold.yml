@@ -1,0 +1,74 @@
+# 推荐时间，格式为 `YYYY-MM-DD`。
+# 如果不添加引号，会自动解析成时间对象，为避免之，可以在前面添加 `!!str` 进行类型指定。
+date: '2019-05-25'
+
+# 歌曲编号，未给定时将不会有点击跳转到网易云音乐的歌曲页面。
+id: 1299557594
+# 歌曲名称，**必需**。
+name: Strobe
+# 持续时间，这里是一个到毫秒级别的整数。
+# 可以直接传入 `mm:ss` 的格式，但注意需要添加引号或者采用 `!!str` 指定为字符串。
+duration: 244335
+# 曲风类型。
+category: Electro House
+# 语种，如果有多个，直接写在一起便可。
+language: English
+# 歌手，如果有多个，采用列表的方式进行指定。
+# id 为该歌手的编号
+# name 为该歌手的名称
+# 如果没有 id，可以直接指定歌手名称，如：
+# artist: Vexento
+artist:
+  - id: 12037010
+    name: Vexento
+  - id: 29818086
+    name: Katie McConnell
+# 唱片信息
+# id 为唱片编号
+# name 为唱片名称
+# date 为唱片发布日期
+# company 为唱片公司
+# 如果没有 id，可以直接指定为唱片名。
+album:
+  id: 72072116
+  name: Strobe
+  date: '2018-08-04'
+  company: Self-Released
+
+# 简介，针对该歌曲的一个简单说明。
+intro: 该曲听起来略为抓耳，女生的长气息咏唱，仿佛在诉说内心的等待。
+
+# 歌词，注意使用 `|` 表示多行文本。
+lyrics: |
+  Why wait for the moment to pass
+  为什么要让时光白白流逝
+  I want it to start now start now
+  我希望现在就能开始,就在此刻
+  I want this feeling to last
+  想要持续这种感觉
+  Keep it alight now alight now
+  让它熄灭吧,现在
+  It's been to long
+  已经很久了
+  The chase has been drawn out enough
+  你我之间的追逐到此已足够
+  I'll wait till you move on
+  我会在此等侯直到你离去
+  Move on and turn this to dust
+  继续前进并且把这些变为尘埃
+  It's been too long
+  时间如此之长
+  It's been too long
+  时间如此之长
+  It's been to long
+  够久了
+  The chase has been drawn out enough
+  你我的追逐游戏该到尽头了
+  I'll wait till you move on
+  我会在此等侯直到你离去
+  Move on and turn this to dust
+  继续前进并且把这些变为尘埃
+  It's been too long
+  这一切似乎太久
+  It's been too long
+  太久

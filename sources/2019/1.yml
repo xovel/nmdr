@@ -1,0 +1,18 @@
+id: 36024903
+name: Je te pardonne (Pilule Bleue)
+duration: !!str 3:35
+language: French/English
+nolisten: true
+artist:
+  - id: 710267
+    name: Maître Gims
+  - id: 74625
+    name: Sia
+album:
+  id: 3367822
+  name: Mon coeur avait raison
+  year: !!str 2015-08-28
+  company: 索尼音乐
+mv: 5501271
+
+intro: 德语跟英语的搭配，别有一番韵味。

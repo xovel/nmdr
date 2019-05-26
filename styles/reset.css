@@ -1,0 +1,90 @@
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+body,
+p,
+input,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+li,
+dl,
+dt,
+dd,
+form,
+ol,
+div {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  vertical-align: middle;
+}
+body {
+  font-family: 'San Francisco', 'Noto SansCJK', 'microsoft yahei', helvetica, arial;
+  color: #000;
+}
+img {
+  border: none;
+  vertical-align: bottom;
+}
+p a {
+  color: red;
+}
+input {
+  outline: none;
+}
+h1,
+.h1 {
+  font-size: 31px;
+}
+h2,
+.h2 {
+  font-size: 25px;
+}
+h3,
+.h3 {
+  font-size: 21px;
+}
+h4,
+.h4 {
+  font-size: 15px;
+}
+h5,
+.h5 {
+  font-size: 12px;
+}
+h6,
+.h6 {
+  font-size: 11px;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+.left {
+  float: left;
+}
+.right {
+  float: right;
+}
+.hide {
+  display: none;
+}
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px white inset;
+  box-shadow: 0 0 0 1000px white inset;
+}

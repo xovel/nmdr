@@ -1,0 +1,29 @@
+{
+  "name": "nmdr",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Netease music recommendation.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xovel/nmr.git"
+  },
+  "keywords": [],
+  "author": "xovel <xovel@vip.qq.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xovel/nmr/issues"
+  },
+  "homepage": "https://github.com/xovel/nmr#readme",
+  "devDependencies": {
+    "cheerio": "^1.0.0-rc.3",
+    "clean-css": "^4.2.1",
+    "js-yaml": "^3.13.1",
+    "marked": "^0.6.2",
+    "pug": "^2.0.3",
+    "uglify-js": "^3.5.15"
+  }
+}
