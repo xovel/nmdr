@@ -7,7 +7,7 @@ const pug = require('pug')
 const yaml = require('js-yaml')
 
 const CleanCSS = require('clean-css')
-const UglifyJS = require("uglify-js")
+const UglifyJS = require('uglify-js')
 
 const distFolder = 'docs'
 
@@ -63,14 +63,14 @@ function loadNMR(nmrPath) {
       path.extname(curPath) === '.yml'
       || path.extname(curPath) === '.yaml'
     ) {
-      const item = loadYML(curPath)
-      item.artist = [].concat(item.artist)
+      const current = loadYML(curPath)
+      current.artist = [].concat(current.artist)
 
-      if (typeof item.duration === 'number') {
-        item.duration = transferDuration(item.duration)
+      if (typeof current.duration === 'number') {
+        current.duration = transferDuration(current.duration)
       }
 
-      ret.push(item)
+      ret.push(current)
     }
   })
 

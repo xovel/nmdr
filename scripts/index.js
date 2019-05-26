@@ -1,3 +1,4 @@
+/* eslint-disable block-scoped-var, no-redeclare */
 window.onload = function () {
   var $lyricsExpand = document.querySelectorAll('.lyrics-expand');
   for (var i = 0; i < $lyricsExpand.length; i++) {

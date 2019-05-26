@@ -1,2 +1,5 @@
 extends:
   - zob
+
+rules:
+  no-console: 0
