@@ -5,6 +5,7 @@ const path = require('path')
 
 const pug = require('pug')
 const yaml = require('js-yaml')
+const marked = require('marked')
 
 const CleanCSS = require('clean-css')
 const UglifyJS = require('uglify-js')
@@ -48,12 +49,14 @@ function isDirectory(filepath) {
   return false;
 }
 
+const config = loadYML('_config.yml')
+
 const allNMR = loadNMR('sources')
 
 function loadNMR(nmrPath) {
   const ret = []
 
-  const list = fs.readdirSync(nmrPath)
+  const list = fs.readdirSync(nmrPath).sort().reverse()
 
   list.forEach(item => {
     const curPath = path.join(nmrPath, item)
@@ -63,22 +66,27 @@ function loadNMR(nmrPath) {
       path.extname(curPath) === '.yml'
       || path.extname(curPath) === '.yaml'
     ) {
-      const current = loadYML(curPath)
-      current.artist = [].concat(current.artist)
+      const currents = [].concat(loadYML(curPath))
+      currents.reverse().forEach(current => {
+        current.artist = [].concat(current.artist)
 
-      if (typeof current.duration === 'number') {
-        current.duration = transferDuration(current.duration)
-      }
+        if (current.intro && config.marked) {
+          current.intro = marked(current.intro)
+        }
 
-      ret.push(current)
+        if (typeof current.duration === 'number') {
+          current.duration = transferDuration(current.duration)
+        }
+
+        ret.push(current)
+      })
     }
   })
 
   return ret
 }
 
-function transferDuration(milliseconds) {
-  const seconds = Math.floor(milliseconds / 1000)
+function transferDuration(seconds) {
   const minite = Math.floor(seconds / 60)
   let second = seconds % 60
   if (second < 10) {
@@ -87,8 +95,6 @@ function transferDuration(milliseconds) {
   return `${minite}:${second}`
 }
 
-const config = loadYML('_config.yml')
-
 const indexCompiler = pug.compile(read('templates/index.pug'), {
   filename: 'templates/index.pug',
   // pretty: true
@@ -96,7 +102,7 @@ const indexCompiler = pug.compile(read('templates/index.pug'), {
 
 fs.copyFileSync('favicon.ico', 'docs/favicon.ico')
 
-const playerOptions = {
+const jsData = {
   width: 300,
   auto: 1,
   height: 86,
@@ -104,29 +110,29 @@ const playerOptions = {
 }
 
 if (config.player) {
-  playerOptions.auto = config.player.auto === false ? 0 : 1
+  jsData.auto = config.player.auto === false ? 0 : 1
   if (config.player.mini) {
-    playerOptions.height = 52
-    playerOptions.innerHeight = 32
+    jsData.height = 52
+    jsData.innerHeight = 32
   }
 }
 
-const cssOptions = {
-  width: playerOptions.width
+const cssData = {
+  width: jsData.width
 }
 
 function loadCSS(filepath) {
-  return read(filepath).replace(/\$\{([^}]+)\}/g, (_, name) => cssOptions[name] || '')
+  return read(filepath).replace(/\$\{([^}]+)\}/g, (_, name) => cssData[name] || '')
 }
 
 const styleRaw = [
   loadCSS('styles/reset.css'),
   loadCSS('styles/index.css'),
-  loadCSS('styles/iframe.css')
+  loadCSS('styles/listen.css')
 ].join('\n')
 
-const cleanCSsOptions = {}
-const styleContent = new CleanCSS(cleanCSsOptions).minify(styleRaw).styles
+const cleanCssOptions = {}
+const styleContent = new CleanCSS(cleanCssOptions).minify(styleRaw).styles
 
 const pugData = {
   config,
@@ -139,7 +145,7 @@ if (config.style) {
   write('style/index.css', styleContent)
 }
 
-const jsRaw = read('scripts/index.js').replace(/\$\{([^}]+)\}/g, (_, name) => playerOptions[name] || '')
+const jsRaw = read('scripts/index.js').replace(/\$\{([^}]+)\}/g, (_, name) => jsData[name] || '')
 
 const uglifyOptions = {}
 const jsContent = UglifyJS.minify(jsRaw, uglifyOptions).code
