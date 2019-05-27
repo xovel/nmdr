@@ -1,6 +1,8 @@
 .nmr {
   max-width: 800px;
   margin: 0 auto;
+
+  padding-bottom: 200px;
 }
 
 .nmr > h1 {
@@ -30,7 +32,6 @@
 }
 
 .item-title > a,
-.item-title > span,
 .item-artist > a,
 .item-artist > span,
 .item-album > span,
