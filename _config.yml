@@ -3,5 +3,7 @@ title: xovel/nmr
 style: true
 script: true
 
+github: true
+
 player:
   mini: false

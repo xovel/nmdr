@@ -5,9 +5,12 @@ html
 
   body
     .nmr
-      h1 Netease music recommendation.
+      h1 网易云音乐推荐
 
       block content
+
+    if config.github
+      include ./github
 
     if script
       script!=script
