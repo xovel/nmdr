@@ -38,7 +38,7 @@ function read(filepath) {
   return fs.readFileSync(filepath, 'utf8').toString()
 }
 
-function write(dest, content, distFolder = 'pieces') {
+function write(dest, content, distFolder = 'cache') {
   const filepath = path.join(distFolder, dest)
   const filedir = path.dirname(filepath)
 
@@ -52,19 +52,27 @@ function write(dest, content, distFolder = 'pieces') {
   })
 }
 
+const LIST_FIEL_PATH = './cache/list.json'
+const list = fs.existsSync(LIST_FIEL_PATH) ? require(LIST_FIEL_PATH) : []
+
 async function fetch(id, force) {
   let raw
-  if (!force && fs.existsSync(path.join('cache', `${id}.html`))) {
-    raw = read(path.join('cache', `${id}.html`))
+  if (!force && list.includes(id)) {
+    raw = read(path.join('cache', 'html', `${id}.html`))
   } else {
     raw = await get(`https://music.163.com/song?id=${id}`)
-  }
-  if (raw === undefined) {
-    throw new Error(`connot fint ${id}`)
-  }
 
-  write(`${id}.html`, raw, 'cache')
+    if (raw === undefined) {
+      throw new Error(`connot fint ${id}`)
+    }
 
+    write(`${id}.html`, raw, 'cache/html')
+
+    if (!list.includes(id)) {
+      list.push(id)
+      write(LIST_FIEL_PATH, JSON.stringify(list), '')
+    }
+  }
   const $ = cheerio.load(raw)
 
   const data = {}
@@ -77,7 +85,7 @@ async function fetch(id, force) {
     name: $('meta[property="og:music:album"]').attr('content').trim()
   }
   data.duration = $('meta[property="music:duration"]').attr('content').trim()
-  data.artist = $('meta[property="og:music:artist"]').attr('content').split('/').map((item, index) => ({
+  data.artist = $('.des.s-fc4 span').attr('title').split(' / ').map((item, index) => ({
     id: $('meta[property="music:musician"]').eq(index).attr('content').split('id=')[1].trim(),
     name: item
   }))
@@ -91,6 +99,14 @@ async function fetch(id, force) {
 }
 
 const options = argv(process.argv.slice(2))
+
+if (!options.id) {
+  options.id = options._[0]
+}
+
+if (options.id && options.id.indexOf('http') === 0) {
+  options.id = options.id.split('?id=')[1].trim()
+}
 
 function save(data) {
   const ret = []
@@ -115,7 +131,11 @@ function save(data) {
     ret.push(`mv: ${data.mv}`)
   }
 
-  write(`${options.id}.yml`, ret.join('\n') + '\n')
+  const result = ret.join('\n') + '\n'
+
+  console.log(result)
+
+  write(`${options.id}.yml`, result, 'cache/data')
 }
 
 if (options.id) {
