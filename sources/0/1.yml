@@ -9,6 +9,7 @@
     id: 420001
     name: iTunes Session
   mv: 333028
+  nolisten: true
 -
   id: 3986017
   name: Viva La Vida
@@ -20,6 +21,7 @@
     id: 403157
     name: Viva La Vida or Death and All His Friends
   mv: 376215
+  nolisten: true
 -
   id: 38679412
   name: Lonely Dance
@@ -51,6 +53,7 @@
   album:
     id: 36196158
     name: Friendships
+  nolisten: true
 -
   id: 1296410418
   name: Darkside
@@ -66,6 +69,7 @@
     id: 72006345
     name: Darkside
   mv: 10738268
+  nolisten: true
 -
   id: 459091600
   name: 路
@@ -76,6 +80,7 @@
   album:
     id: 35173149
     name: 路
+  nolisten: true
 -
   id: 3147554
   name: Be My World
@@ -86,6 +91,7 @@
   album:
     id: 318386
     name: Star
+  nolisten: true
 -
   id: 452986458
   name: 红昭愿
@@ -96,6 +102,7 @@
   album:
     id: 35114938
     name: 红昭愿
+  nolisten: true
 -
   id: 447926067
   name: 鼓楼
@@ -106,6 +113,7 @@
   album:
     id: 35069014
     name: 无法长大
+  nolisten: true
 -
   id: 29567187
   name: 吉姆餐厅
@@ -116,6 +124,7 @@
   album:
     id: 3048030
     name: 吉姆餐厅
+  nolisten: true
 -
   id: 32807209
   name: Wildlife Refugee
@@ -126,3 +135,4 @@
   album:
     id: 3173032
     name: Ambient Dreams
+  nolisten: true
