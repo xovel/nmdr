@@ -6,6 +6,10 @@
 
 项目背景请参阅[这里](./BACKGROUND.md)。
 
+## Note
+
+网易云音乐在外链播放器限制过于严苛，现**弃坑**而去。
+
 ## Develop
 
 ```bash
@@ -13,6 +17,23 @@ git clone git@github.com:xovel/nmr.git
 cd nmr
 npm i
 node build
+```
+
+## Fetch
+
+使用 `node fetch.js` 命令可以从网易云页面获取歌曲信息，支持的方式如下：
+
+```bash
+# 直接指定 id
+node fetch.js --id 3795127
+```
+```bash
+# 可以不使用 `--id` 标识
+node fetch.js 3795127
+```
+```bash
+# 可以直接指定链接
+node fetch.js https://music.163.com/song?id=32807209
 ```
 
 ## Config
