@@ -291,7 +291,7 @@ class NetEaseMusic {
       this.savePlaylist(data)
     }
 
-    this.log(data)
+    return data
   }
 
   sleep(time = 3000) {
