@@ -8,7 +8,6 @@
   album:
     id: 3066214
     name: 一百万个可能
-  nolisten: true
 
 -
   id: 30039520
@@ -17,3 +16,4 @@
   artist:
     - id: 900139
       name: 曾经艺也
+  listen: true
