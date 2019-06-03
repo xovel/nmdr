@@ -20,17 +20,14 @@ node build
 使用 `node fetch.js` 命令可以从网易云页面获取歌曲信息，支持的方式如下：
 
 ```bash
-# 直接指定 id
-node fetch.js --id 3795127
+node fetch.js [type]? [id] [options]
 ```
-```bash
-# 可以不使用 `--id` 标识
-node fetch.js 3795127
-```
-```bash
-# 可以直接指定链接
-node fetch.js https://music.163.com/song?id=32807209
-```
+
+- type: 操作类型，当前支持 `song` 和 `playlist`，分别表示获取歌曲和播放列表。如果不指定，默认为 `song`，其他非数字值将直接报错。
+- id: 一串数字，即当前操作类型的数据编号，可以使用 `--id` 进行指定，支持直接使用具体的链接如 `https://music.163.com/song?id=32807209`，将会截取 `id=` 后面的内容作为标识符
+- options: 其他选项
+    - options.force 强制拉取新数据
+    - options.list `playlist` 模式下逐个获取歌曲信息，该操作有风险，频繁操作会导致网易云封禁爬取，故此设置了一个默认延时，~~但效率不高~~。
 
 ## Config
 
