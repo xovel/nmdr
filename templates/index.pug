@@ -12,6 +12,9 @@ block content
           else
             span=item.name
 
+          if item.nocopy
+            span 暂无版权
+
           if item.mv
             a(target="_blank" href=`https://music.163.com/mv?id=${item.mv}`) [MV]
         .item-artist 歌手：
