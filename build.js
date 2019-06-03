@@ -51,7 +51,8 @@ function isDirectory(filepath) {
 
 const config = loadYML('_config.yml')
 
-const allNMR = loadNMR('sources')
+const allNMR = loadNMR('sources/nmr')
+const allPlayList = loadNMR('sources/playlist')
 
 function loadNMR(nmrPath) {
   const ret = []
@@ -68,7 +69,11 @@ function loadNMR(nmrPath) {
     ) {
       const currents = [].concat(loadYML(curPath))
       currents.reverse().forEach(current => {
-        current.artist = [].concat(current.artist)
+        if (current.artist) {
+          current.artist = [].concat(current.artist)
+        } else {
+          current.artist = []
+        }
 
         if (current.intro && config.marked) {
           current.intro = marked(current.intro)
@@ -97,6 +102,11 @@ function transferDuration(seconds) {
 
 const indexCompiler = pug.compile(read('templates/index.pug'), {
   filename: 'templates/index.pug',
+  // pretty: true
+})
+
+const playlistCompiler = pug.compile(read('templates/playlist.pug'), {
+  filename: 'templates/playlist.pug',
   // pretty: true
 })
 
@@ -136,7 +146,8 @@ const styleContent = new CleanCSS(cleanCssOptions).minify(styleRaw).styles
 
 const pugData = {
   config,
-  list: allNMR
+  list: allNMR,
+  playlist: allPlayList
 }
 
 if (config.style) {
@@ -159,3 +170,21 @@ if (config.script) {
 const indexContent = indexCompiler(pugData)
 
 write('index.html', indexContent)
+
+allPlayList.forEach(item => {
+  const curList = {}
+
+  item.song.forEach(sub => {
+    curList[sub.id] = sub
+  })
+
+  item.list.forEach(sub => {
+    curList[sub.id] = sub
+  })
+
+  write(`/playlist/${item.id}.html`, playlistCompiler({
+    ...pugData,
+    playlist: item,
+    list: item.song.map(sub => curList[sub.id])
+  }))
+})
