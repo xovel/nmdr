@@ -195,11 +195,11 @@ class NetEaseMusic {
     return data
   }
 
-  _hash(value) {
-    if (value.indexOf('#') === -1) {
-      return value
+  _pure(value) {
+    if (/[#:"]/.test(value)) {
+      return `"${value.replace(/"/g, '\\"')}"`
     }
-    return `"${value}"`
+    return value
   }
 
   genSongYML(data, prefix = '') {
@@ -210,18 +210,18 @@ class NetEaseMusic {
     }
 
     ret.push(`id: ${data.id}`)
-    ret.push(`name: ${this._hash(data.name)}`)
+    ret.push(`name: ${this._pure(data.name)}`)
 
     ret.push(`duration: ${data.duration}`)
     // ret.push(`description: ${data.description}`)
     ret.push(`artist:`)
     data.artist.forEach(item => {
       ret.push(`  - id: ${item.id}`)
-      ret.push(`    name: ${this._hash(item.name)}`)
+      ret.push(`    name: ${this._pure(item.name)}`)
     })
     ret.push(`album:`)
     ret.push(`  id: ${data.album.id}`)
-    ret.push(`  name: ${this._hash(data.album.name)}`)
+    ret.push(`  name: ${this._pure(data.album.name)}`)
     if (data.mv) {
       ret.push(`mv: ${data.mv}`)
     }
@@ -239,6 +239,10 @@ class NetEaseMusic {
     this.log(result)
 
     this.write(`data/song-${data.id}.yml`, result)
+  }
+
+  random(min, max) {
+    return min + Math.floor(Math.random() * (max - min))
   }
 
   async getPlaylist(options = {}) {
@@ -268,12 +272,17 @@ class NetEaseMusic {
           if (options.force || !this.list.song.includes(id)) {
             // 给一个延时，避免网易云屏蔽爬取导致所有页面强制视为 404
             // 如果歌单中歌曲过多，任务搁一边，先去喝杯茶什么的
-            await this.sleep()
+            await this.sleep(this.random(3000, 5000))
+
+            // 每五次再等一个随机时间
+            if (i > 0 && i % 5 === 0) {
+              await this.sleep(this.random(1200, 2500))
+            }
           }
           let curSongData = await this.getSong({id, save: false, force: options.force})
           data.list[i] = this.genSongYML(curSongData, '    ')
         } catch(e) {
-          //
+          this.log(e)
         }
       }
     }
@@ -301,7 +310,7 @@ class NetEaseMusic {
     data.song.forEach(item => {
       ret.push('  -')
       ret.push(`    id: ${item.id}`)
-      ret.push(`    name: ${this._hash(item.name)}`)
+      ret.push(`    name: ${this._pure(item.name)}`)
     })
 
     ret.push(`list:`)

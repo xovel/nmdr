@@ -1204,7 +1204,7 @@ list:
     duration: 217
     artist:
       - id: 132984
-        name: Re:Locate
+        name: "Re:Locate"
       - id: 137509
         name: Robert Nickson
       - id: 1155034
@@ -1606,7 +1606,7 @@ list:
         name: Cafe Americaine
     album:
       id: 3038324
-      name: Music From The Sea: 50 Beautiful Del Mar Sounds
+      name: "Music From The Sea: 50 Beautiful Del Mar Sounds"
 
   -
     id: 28054783
@@ -1837,7 +1837,7 @@ list:
     duration: 339
     artist:
       - id: 736016
-        name: Ascetic:
+        name: "Ascetic:"
       - id: 97254
         name: Martian
     album:
@@ -2490,7 +2490,7 @@ list:
         name: Michael Learns To Rock
     album:
       id: 505557
-      name: Love 101 : 101 Ways To Say I Love You
+      name: "Love 101 : 101 Ways To Say I Love You"
 
   -
     id: 407761576
