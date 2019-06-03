@@ -1,6 +1,10 @@
 extends ./layout/core.pug
 
 block content
+  h1 网易云音乐推荐
+  .playlist 歌单：
+    each item in playlist
+      a(href=`./playlist/${item.id}.html`)= item.name
   .list
     each item in list
       .item
