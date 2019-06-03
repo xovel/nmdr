@@ -60,3 +60,10 @@
   font-family: Verdana;
   display: none;
 }
+
+.playlist {
+  padding: 10px;
+}
+.playlist a {
+  margin-right: 20px;
+}

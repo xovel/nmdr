@@ -1,0 +1,57 @@
+extends ./layout/core.pug
+
+block content
+  h1=`当前歌单：${playlist.name}`
+  .list
+    each item in list
+      .item
+        .item-title 歌名：
+          if item.id
+            a(target="_blank" href=`https://music.163.com/song?id=${item.id}`)=item.name
+            if item.listen && !item.nocopy
+              span.item-listen(data-id=item.id) 试听
+          else
+            span=item.name
+
+          if item.nocopy
+            span 暂无版权
+
+          if item.mv
+            a(target="_blank" href=`https://music.163.com/mv?id=${item.mv}`) [MV]
+        .item-artist 歌手：
+          if item.artist && item.artist.length > 0
+            each artist in item.artist
+              if artist.id
+                a(target="_blank" href=`https://music.163.com/artist?id=${artist.id}`)=artist.name
+              else
+                span=artist
+          else
+            span -
+        .item-info
+          if item.language
+            span 语种：#{item.language}
+          if item.duration
+            span 时长：#{item.duration}
+          if item.category
+            span 分类：#{item.category}
+        if item.album
+          .item-album
+            span 所属专辑：
+              if item.album.id
+                a(target="_blank" href=`https://music.163.com/album?id=${item.album.id}`)=item.album.name
+              else
+                span=item.album
+        if item.intro
+          if config.marked
+            .item-intro!=item.intro
+          else
+            .item-intro=item.intro
+        if item.date
+          .item-date 推荐时间：#{item.date}
+        if item.lyrics
+          .item-lyrics
+            .lyrics-expand 查看歌词
+            pre.lyrics-view=item.lyrics
+
+    else
+      .none 当前暂无推荐。
