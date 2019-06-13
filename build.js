@@ -175,10 +175,14 @@ allPlayList.forEach(item => {
   const curList = {}
 
   item.song.forEach(sub => {
+    if (typeof sub.duration === 'number')
+      sub.duration = transferDuration(sub.duration)
     curList[sub.id] = sub
   })
 
   item.list.forEach(sub => {
+    if (typeof sub.duration === 'number')
+      sub.duration = transferDuration(sub.duration)
     curList[sub.id] = sub
   })
 
